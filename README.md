@@ -32,5 +32,5 @@ tryhackme-writeups/
 
 ## À propos
 
-Rédigé par **Alain Joël Deffo Neda** — étudiant en cybersécurité, ISC2 Certified in Cybersecurity (CC).
+Rédigé par **Joël Deffo** — étudiant en cybersécurité, ISC2 Certified in Cybersecurity (CC).
 Portfolio : [deffojoel.github.io/portfolio](https://deffojoel.github.io/portfolio/)
