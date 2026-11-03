@@ -9,9 +9,9 @@
 | **CVE** | CVE-2017-0143 à CVE-2017-0148 (MS17-010 / EternalBlue) |
 | **Cible** | Windows Server 2012 R2 Datacenter (environnement de lab isolé et jetable fourni par TryHackMe) |
 | **Outils** | Nmap, Metasploit Framework, John the Ripper |
-| **Statut** | ✅ Terminé — 3 flags capturés |
+| **Statut** | Terminé — 3 flags capturés |
 
-> ⚠️ **Cadre d'exercice.** Cette machine est une cible volontairement vulnérable, provisionnée par TryHackMe pour l'apprentissage, accessible uniquement via le VPN du lab et détruite à la fin de la session. Les adresses IP, hash et mots de passe ci-dessous n'ont de valeur que dans ce contexte pédagogique précis et ne doivent jamais être réutilisés tels quels sur un test réel sans autorisation écrite (scope / rules of engagement).
+>  **Cadre d'exercice.** Cette machine est une cible volontairement vulnérable, provisionnée par TryHackMe pour l'apprentissage, accessible uniquement via le VPN du lab et détruite à la fin de la session. Les adresses IP, hash et mots de passe ci-dessous n'ont de valeur que dans ce contexte pédagogique précis et ne doivent jamais être réutilisés tels quels sur un test réel sans autorisation écrite (scope / rules of engagement).
 
 ## Sommaire
 
