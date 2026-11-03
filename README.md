@@ -9,13 +9,13 @@ Chaque write-up suit la même structure : **reconnaissance → exploitation → 
 
 L'objectif n'est pas seulement de "capturer le flag", mais de comprendre *pourquoi* chaque vulnérabilité existe et comment s'en prémunir en environnement réel.
 
-> ⚠️ Toutes les cibles documentées ici sont des machines volontairement vulnérables, fournies par TryHackMe dans un cadre pédagogique autorisé et isolé (VPN de lab, machines jetables). Aucune technique décrite dans ce dépôt ne doit être appliquée en dehors d'un environnement pour lequel on dispose d'une autorisation explicite.
+> Toutes les cibles documentées ici sont des machines volontairement vulnérables, fournies par TryHackMe dans un cadre pédagogique autorisé et isolé (VPN de lab, machines jetables). Aucune technique décrite dans ce dépôt ne doit être appliquée en dehors d'un environnement pour lequel on dispose d'une autorisation explicite.
 
 ## Rooms documentées
 
 | Room | Catégorie | CVE / Technique | Statut | Write-up |
 |---|---|---|---|---|
-| [Blue](https://tryhackme.com/room/blue) | Exploitation Windows / SMB | MS17-010 (EternalBlue) | ✅ Terminé | [`rooms/blue-eternalblue/`](rooms/blue-eternalblue/README.md) |
+| [Blue](https://tryhackme.com/room/blue) | Exploitation Windows / SMB | MS17-010 (EternalBlue) | Terminé | [`rooms/blue-eternalblue/`](rooms/blue-eternalblue/README.md) |
 
 *(De nouvelles rooms seront ajoutées au fur et à mesure.)*
 
