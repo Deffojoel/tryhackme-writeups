@@ -4,8 +4,8 @@ Dépôt personnel documentant mes rooms et CTF réalisés sur [TryHackMe](https:
 
 Chaque write-up suit la même structure : **reconnaissance → exploitation → post-exploitation → flags**, avec captures d'écran à l'appui, et se termine systématiquement par deux sections volontairement mises en avant :
 
-- **Ce qu'il faut retenir** — la compétence ou le concept clé démontré à chaque étape.
-- **Recommandations défensives** — comment un défenseur (Blue Team) aurait pu prévenir, détecter ou limiter l'attaque documentée.
+- **Ce qu'il faut retenir**  la compétence ou le concept clé démontré à chaque étape.
+- **Recommandations défensives**  comment un défenseur (Blue Team) aurait pu prévenir, détecter ou limiter l'attaque documentée.
 
 L'objectif n'est pas seulement de "capturer le flag", mais de comprendre *pourquoi* chaque vulnérabilité existe et comment s'en prémunir en environnement réel.
 
