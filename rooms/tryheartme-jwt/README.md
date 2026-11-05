@@ -9,9 +9,9 @@
 | **Vulnérabilité** | JSON Web Token (JWT) falsifiable côté client — élévation de privilèges |
 | **Cible** | Boutique en ligne "TryHeartMe" (`http://MACHINE_IP:5000`) |
 | **Outils** | Burp Suite (Proxy/Intercept), jwt.io (JWT Debugger), outils de développement du navigateur |
-| **Statut** | ✅ Terminé — flag "Valenflag" récupéré |
+| **Statut** | Terminé — flag "Valenflag" récupéré |
 
-> ⚠️ **Cadre d'exercice.** Cible fournie par TryHackMe pour l'apprentissage, isolée et détruite en fin de session. Les tokens, montants de crédits et rôles ci-dessous n'ont de valeur que dans ce contexte. Modifier un JWT pour s'octroyer des privilèges sur un système réel sans autorisation écrite est illégal.
+>  **Cadre d'exercice.** Cible fournie par TryHackMe pour l'apprentissage, isolée et détruite en fin de session. Les tokens, montants de crédits et rôles ci-dessous n'ont de valeur que dans ce contexte. Modifier un JWT pour s'octroyer des privilèges sur un système réel sans autorisation écrite est illégal.
 
 ## Sommaire
 
