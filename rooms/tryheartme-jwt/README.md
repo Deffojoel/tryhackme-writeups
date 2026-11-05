@@ -4,7 +4,6 @@
 |---|---|
 | **Room** | [TryHeartMe](https://tryhackme.com/room/tryheartme) |
 | **Plateforme** | TryHackMe |
-| **Niveau** | Facile |
 | **Catégorie** | Web — Authentification / Autorisation |
 | **Vulnérabilité** | JSON Web Token (JWT) falsifiable côté client — élévation de privilèges |
 | **Cible** | Boutique en ligne "TryHeartMe" (`http://MACHINE_IP:5000`) |
