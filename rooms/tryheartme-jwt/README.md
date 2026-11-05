@@ -4,11 +4,11 @@
 |---|---|
 | **Room** | [TryHeartMe](https://tryhackme.com/room/tryheartme) |
 | **Plateforme** | TryHackMe |
-| **Catégorie** | Web — Authentification / Autorisation |
-| **Vulnérabilité** | JSON Web Token (JWT) falsifiable côté client — élévation de privilèges |
+| **Catégorie** | Web Authentification / Autorisation |
+| **Vulnérabilité** | JSON Web Token (JWT) falsifiable côté client | élévation de privilèges |
 | **Cible** | Boutique en ligne "TryHeartMe" (`http://MACHINE_IP:5000`) |
 | **Outils** | Burp Suite (Proxy/Intercept), jwt.io (JWT Debugger), outils de développement du navigateur |
-| **Statut** | Terminé — flag "Valenflag" récupéré |
+| **Statut** | Terminé | flag "Valenflag" récupéré |
 
 >  **Cadre d'exercice.** Cible fournie par TryHackMe pour l'apprentissage, isolée et détruite en fin de session. Les tokens, montants de crédits et rôles ci-dessous n'ont de valeur que dans ce contexte. Modifier un JWT pour s'octroyer des privilèges sur un système réel sans autorisation écrite est illégal.
 
@@ -31,7 +31,7 @@
 
 TryHeartMe est une boutique en ligne de la Saint-Valentin : bouquets, chocolats, carte de vœux. Chaque article coûte un certain nombre de **crédits**, affichés sur le compte utilisateur. L'énoncé demande d'acheter un article caché, le **"Valenflag"**, qui n'apparaît pas dans le catalogue normal.
 
-Un compte fraîchement créé démarre avec **0 crédit**  impossible donc d'acheter quoi que ce soit normalement. C'est le point de blocage qui oriente immédiatement l'attaque : il faut soit obtenir des crédits, soit obtenir un rôle qui en donne accès sans paiement.
+Un compte fraîchement créé démarre avec **0 crédit** — impossible donc d'acheter quoi que ce soit normalement. C'est le point de blocage qui oriente immédiatement l'attaque : il faut soit obtenir des crédits, soit obtenir un rôle qui en donne accès sans paiement.
 
 ## 2. Reconnaissance — comprendre le flux d'achat
 
