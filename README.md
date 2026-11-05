@@ -1,6 +1,6 @@
 # TryHackMe Write-ups
 
-Dépôt personnel documentant mes rooms et CTF réalisés sur [TryHackMe](https://tryhackme.com), dans le cadre de ma formation en cybersécurité (Mastère Cybersécurité — Sup de Vinci, ANSSI SecNumedu).
+Dépôt personnel documentant mes rooms et CTF réalisés sur [TryHackMe](https://tryhackme.com), dans le cadre de ma formation en cybersécurité (Mastère Cybersécurité Sup de Vinci, ANSSI SecNumedu).
 
 Chaque write-up suit la même structure : **reconnaissance → exploitation → post-exploitation → flags**, avec captures d'écran à l'appui, et se termine systématiquement par deux sections volontairement mises en avant :
 
@@ -16,7 +16,7 @@ L'objectif n'est pas seulement de "capturer le flag", mais de comprendre *pourqu
 | Room | Catégorie | CVE / Technique | Statut | Write-up |
 |---|---|---|---|---|
 | [Blue](https://tryhackme.com/room/blue) | Exploitation Windows / SMB | MS17-010 (EternalBlue) | Terminé | [`rooms/blue-eternalblue/`](rooms/blue-eternalblue/README.md) |
-| [TryHeartMe](https://tryhackme.com/room/tryheartme) | Web — Auth/Autorisation | Falsification de JWT (élévation de privilèges) | Terminé | [`rooms/tryheartme-jwt/`](rooms/tryheartme-jwt/README.md) |
+| [TryHeartMe](https://tryhackme.com/room/tryheartme) | Web Auth/Autorisation | Falsification de JWT (élévation de privilèges) | Terminé | [`rooms/tryheartme-jwt/`](rooms/tryheartme-jwt/README.md) |
 
 *(De nouvelles rooms seront ajoutées au fur et à mesure.)*
 
