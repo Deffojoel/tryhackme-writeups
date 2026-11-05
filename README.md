@@ -9,13 +9,14 @@ Chaque write-up suit la même structure : **reconnaissance → exploitation → 
 
 L'objectif n'est pas seulement de "capturer le flag", mais de comprendre *pourquoi* chaque vulnérabilité existe et comment s'en prémunir en environnement réel.
 
-> ⚠️ Toutes les cibles documentées ici sont des machines volontairement vulnérables, fournies par TryHackMe dans un cadre pédagogique autorisé et isolé (VPN de lab, machines jetables). Aucune technique décrite dans ce dépôt ne doit être appliquée en dehors d'un environnement pour lequel on dispose d'une autorisation explicite.
+> Toutes les cibles documentées ici sont des machines volontairement vulnérables, fournies par TryHackMe dans un cadre pédagogique autorisé et isolé (VPN de lab, machines jetables). Aucune technique décrite dans ce dépôt ne doit être appliquée en dehors d'un environnement pour lequel on dispose d'une autorisation explicite.
 
 ## Rooms documentées
 
 | Room | Catégorie | CVE / Technique | Statut | Write-up |
 |---|---|---|---|---|
-| [Blue](https://tryhackme.com/room/blue) | Exploitation Windows / SMB | MS17-010 (EternalBlue) | ✅ Terminé | [`rooms/blue-eternalblue/`](rooms/blue-eternalblue/README.md) |
+| [Blue](https://tryhackme.com/room/blue) | Exploitation Windows / SMB | MS17-010 (EternalBlue) | Terminé | [`rooms/blue-eternalblue/`](rooms/blue-eternalblue/README.md) |
+| [TryHeartMe](https://tryhackme.com/room/tryheartme) | Web — Auth/Autorisation | Falsification de JWT (élévation de privilèges) | Terminé | [`rooms/tryheartme-jwt/`](rooms/tryheartme-jwt/README.md) |
 
 *(De nouvelles rooms seront ajoutées au fur et à mesure.)*
 
@@ -32,5 +33,5 @@ tryhackme-writeups/
 
 ## À propos
 
-Rédigé par **Alain Joël Deffo Neda** — étudiant en cybersécurité, ISC2 Certified in Cybersecurity (CC).
+Rédigé par **Joël Deffo** — étudiant en cybersécurité, ISC2 Certified in Cybersecurity (CC).
 Portfolio : [deffojoel.github.io/portfolio](https://deffojoel.github.io/portfolio/)
