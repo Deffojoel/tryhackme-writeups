@@ -16,7 +16,7 @@ L'objectif n'est pas seulement de "capturer le flag", mais de comprendre *pourqu
 | Room | Catégorie | CVE / Technique | Statut | Write-up |
 |---|---|---|---|---|
 | [Blue](https://tryhackme.com/room/blue) | Exploitation Windows / SMB | MS17-010 (EternalBlue) | Terminé | [`rooms/blue-eternalblue/`](rooms/blue-eternalblue/README.md) |
-| [TryHeartMe](https://tryhackme.com/room/tryheartme) | Web — Auth/Autorisation | Falsification de JWT (élévation de privilèges) | ✅ Terminé | [`rooms/tryheartme-jwt/`](rooms/tryheartme-jwt/README.md) |
+| [TryHeartMe](https://tryhackme.com/room/tryheartme) | Web — Auth/Autorisation | Falsification de JWT (élévation de privilèges) | Terminé | [`rooms/tryheartme-jwt/`](rooms/tryheartme-jwt/README.md) |
 
 *(De nouvelles rooms seront ajoutées au fur et à mesure.)*
 
