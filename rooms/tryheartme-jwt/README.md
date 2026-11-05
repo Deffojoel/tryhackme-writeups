@@ -31,7 +31,7 @@
 
 TryHeartMe est une boutique en ligne de la Saint-Valentin : bouquets, chocolats, carte de vœux. Chaque article coûte un certain nombre de **crédits**, affichés sur le compte utilisateur. L'énoncé demande d'acheter un article caché, le **"Valenflag"**, qui n'apparaît pas dans le catalogue normal.
 
-Un compte fraîchement créé démarre avec **0 crédit** — impossible donc d'acheter quoi que ce soit normalement. C'est le point de blocage qui oriente immédiatement l'attaque : il faut soit obtenir des crédits, soit obtenir un rôle qui en donne accès sans paiement.
+Un compte fraîchement créé démarre avec **0 crédit**  impossible donc d'acheter quoi que ce soit normalement. C'est le point de blocage qui oriente immédiatement l'attaque : il faut soit obtenir des crédits, soit obtenir un rôle qui en donne accès sans paiement.
 
 ## 2. Reconnaissance — comprendre le flux d'achat
 
